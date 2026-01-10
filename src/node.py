@@ -11,14 +11,18 @@ class Node:
   def g(self): 
   	return self.pathCost
   
-  def createChild(self, problem, action): 
+  def childNode(self, problem, action): 
   	return Node(problem.childState(self.state, action), self,action, self.pathCost + action.cost) 
   
-  def printPath(self):
-    if self.parent: 
-  	  self.parent.printPath()
-    else: 
-    	print("Start")
-    if self.action: 
-    	print("Move:", self.action.name) 
-    self.state.print() 
+  def solution(self): 
+    actions = []
+  	
+    node = self
+    
+    while node.parent is not None: 
+    	actions.append(node.action) 
+    	node = node.parent
+    
+    actions.reverse()
+    return actions
+    
